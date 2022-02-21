@@ -24,7 +24,6 @@ class ShowReceiptViewController: UIViewController {
     var receipts: [Receipt] = []
     var totalExp = 0
 
-    var datas: [[Any]] = [["01月",0],["02月",0],["03月",0],["04月",0],["05月",0],["06月",0],["07月",0],["08月",0],["09月",0],["10月",0],["11月",0],["12月",0]]
     //建立個月份的總花費
     var now = Date()
     lazy var year = Calendar.current.component(.year, from: now)
@@ -43,10 +42,6 @@ class ShowReceiptViewController: UIViewController {
         readData(year: year, month: month, day: nil)
         //讀取特定年月份Firestore的資料
         
-        for i in 1...12{
-            getExpPerMonth(year: 110, month: i)
-        }
-        //取得個月份總花費
     }
     
     @IBAction func nextMonth(){
@@ -120,33 +115,6 @@ class ShowReceiptViewController: UIViewController {
     }
     //實作讀取指定年月份的資料
     
-    func getExpPerMonth(year:Int, month:Int){
-        var monthStr: String
-        if month < 10{
-            monthStr = "0"+String(month)
-        }else{
-            monthStr = String(month)
-        }
-        
-        self.ref.collection("Receipts").whereField("year", isEqualTo: String(year)).whereField("month", isEqualTo: monthStr).addSnapshotListener { snapshot, error in
-            if let error = error{
-                print(error.localizedDescription)
-            }
-            if let snapshot = snapshot{
-                self.totalExp = 0
-                for document in snapshot.documents{
-                    var totalExpense = document.data()["totalExpense"] as? String
-                    totalExpense = totalExpense == "" ? "尚未輸入金額" : totalExpense
-                    if totalExpense != "尚未輸入金額"{
-                        self.totalExp += Int(totalExpense!)!
-                    }
-                    self.datas[month - 1][0] = monthStr + "月"
-                    self.datas[month - 1][1] = self.totalExp
-                }
-            }
-        }
-    }
-    //實作讀取指定年月份的總花費
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail"{
@@ -156,11 +124,6 @@ class ShowReceiptViewController: UIViewController {
             }
         }
         // 跳轉到詳細發票頁面時，傳遞receiptID
-        if segue.identifier == "showAnalyze"{
-            let destinationController = segue.destination as! AnalyzeViewController
-            destinationController.datas = self.datas
-        }
-        // 跳轉到費用分析頁面時，傳遞個月份花費
     }
 }
 extension ShowReceiptViewController: UITableViewDelegate, UITableViewDataSource{

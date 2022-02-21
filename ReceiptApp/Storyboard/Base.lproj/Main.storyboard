@@ -3,6 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -3567,7 +3568,8 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NlE-ut-Ewn"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="tintColor" name="AccentColor"/>
                         <constraints>
                             <constraint firstItem="gK5-3K-ExU" firstAttribute="top" secondItem="NlE-ut-Ewn" secondAttribute="top" constant="24" id="5Au-A1-bVW"/>
                             <constraint firstItem="r64-B2-3vV" firstAttribute="top" secondItem="NlE-ut-Ewn" secondAttribute="top" constant="24" id="Fu6-Zy-MWe"/>
@@ -4034,7 +4036,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2j2-e5-ChS"/>
+        <segue reference="5mx-tE-84C"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left.circle" catalog="system" width="128" height="121"/>
@@ -4046,6 +4048,9 @@
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="person.text.rectangle" catalog="system" width="128" height="93"/>
         <image name="qrcode.viewfinder" catalog="system" width="128" height="115"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

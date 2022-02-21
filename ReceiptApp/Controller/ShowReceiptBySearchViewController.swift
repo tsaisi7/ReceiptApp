@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 class ShowReceiptBySearchViewController: UIViewController {
     
@@ -156,7 +157,10 @@ extension ShowReceiptBySearchViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchReceipts = receipts.filter({ (Receipt) -> Bool in
             for product in Receipt.products!{
-                return Receipt.storeName!.localizedCaseInsensitiveContains(searchText) || product.name!.localizedCaseInsensitiveContains(searchText)
+                if Receipt.storeName!.localizedCaseInsensitiveContains(searchText) || product.name!.localizedCaseInsensitiveContains(searchText){
+                    return true
+                }
+
             }
             return Receipt.storeName!.localizedCaseInsensitiveContains(searchText)
         })
