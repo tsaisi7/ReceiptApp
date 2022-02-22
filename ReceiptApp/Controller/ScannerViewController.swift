@@ -142,9 +142,6 @@ extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate{
             //掃到QRCode後的震動提示
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             print("-----QRcode: \(stringValue)")
-//            let regex = "[A-Z][A-Z][0-9]{19}[a-fA-F0-9]{16}"
-//            let range = NSRegularExpression.init(pattern: regex, options: [])
-//            let match = range.matches(in: stringValue, options: [], range: NSRange(location: 0, length: stringValue.count))
             do {
                 let regex = try NSRegularExpression(pattern: "[A-Z][A-Z][0-9]{19}[a-fA-F0-9]{16}", options: [])
                 if regex.firstMatch(in: stringValue, options: [], range: NSRange(location: 0, length: stringValue.count)) == nil {
@@ -154,6 +151,8 @@ extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate{
             } catch let e as NSError{
                 print(e.localizedDescription)
             }
+            // 用RegularExpression 做驗證是否為發票的QRCode
+            
             let alertController = UIAlertController(title: "掃描成功", message: "發票號碼：\((stringValue as NSString).substring(with: NSMakeRange(0, 2)))-\((stringValue as NSString).substring(with: NSMakeRange(2, 8)))", preferredStyle: .alert)
             let saveAction = UIAlertAction(title: "直接儲存", style: .default) { UIAlertAction in
                 let receiptID = (stringValue as NSString).substring(with: NSMakeRange(0, 2)) + "-" + (stringValue as NSString).substring(with: NSMakeRange(2, 8))

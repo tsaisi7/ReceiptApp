@@ -22,12 +22,10 @@ class AnalyzeViewController: UIViewController {
     //連接storyboard
     var now = Date()
     lazy var year = Calendar.current.component(.year, from: now)
-    var datas: [[Any]]!
     var analyzeData : AnalyzeData!
     var aaChartView: AAChartView!
     var chartModel: AAChartModel!
     let group  = DispatchGroup()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

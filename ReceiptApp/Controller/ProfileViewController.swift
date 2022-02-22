@@ -64,8 +64,8 @@ class ProfileViewController: UIViewController {
              delegate.window?.rootViewController = loginVC
             //登出並將rootVC 設為登入畫面
              
-         } catch let signoutError as NSError{
-             print(signoutError)
+         } catch let logOutError as NSError{
+             print(logOutError)
          }
         //實作登出
     }
